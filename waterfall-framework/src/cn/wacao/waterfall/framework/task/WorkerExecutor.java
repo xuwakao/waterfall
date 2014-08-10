@@ -31,6 +31,7 @@ public class WorkerExecutor extends ThreadPoolExecutor {
         super.beforeExecute(t, r);
         if(r instanceof Worker){
             ((Worker) r).markStart(SystemClock.elapsedRealtime());
+            ((Worker) r).setState(IStateTask.State.STARTING);
         }
     }
 
