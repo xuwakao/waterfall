@@ -5,10 +5,14 @@ package cn.wacao.waterfall.framework.task;
  */
 public interface IStateTask {
     public enum State{
-        CREATED,
-        STARTING,
-        COMPLETED
+        Created,
+        Running,
+        Succsess,
+        Error,
+        Canceled,
+        Interupted
     }
     public State getState();
     public void setState(State state);
+    public boolean isDone();
 }

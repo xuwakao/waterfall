@@ -29,17 +29,30 @@ public class WorkerExecutor extends ThreadPoolExecutor {
     @Override
     protected void beforeExecute(Thread t, Runnable r) {
         super.beforeExecute(t, r);
-        if(r instanceof Worker){
+        if (r instanceof Worker) {
             ((Worker) r).markStart(SystemClock.elapsedRealtime());
-            ((Worker) r).setState(IStateTask.State.STARTING);
+            ((Worker) r).setState(IStateTask.State.Running);
         }
     }
 
     @Override
     protected void afterExecute(Runnable r, Throwable t) {
         super.afterExecute(r, t);
-        if(r instanceof Worker){
+        if (r instanceof Worker) {
             ((Worker) r).markEnd(SystemClock.elapsedRealtime());
+            try {
+                Object result = ((Worker) r).get();
+            } catch (CancellationException ce) {
+                t = ce;
+                ((Worker) r).setState(IStateTask.State.Canceled);
+            } catch (ExecutionException ee) {
+                t = ee.getCause();
+                ((Worker) r).setState(IStateTask.State.Error);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt(); // ignore/reset
+                t = ie;
+                ((Worker) r).setState(IStateTask.State.Interupted);
+            }
         }
     }
 
@@ -50,11 +63,18 @@ public class WorkerExecutor extends ThreadPoolExecutor {
 
     @Override
     public Future<?> submit(Runnable task) {
-        return super.submit(task);
+        if (task == null)
+            throw new NullPointerException();
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD)
+            return super.submit(task);
+        else
+            return newCompatibleTaskFor(task, null);
     }
 
     @Override
     public <T> Future<T> submit(Callable<T> task) {
+        if (task == null)
+            throw new NullPointerException();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD)
             return super.submit(task);
         else
@@ -63,6 +83,8 @@ public class WorkerExecutor extends ThreadPoolExecutor {
 
     @Override
     public <T> Future<T> submit(Runnable task, T result) {
+        if (task == null)
+            throw new NullPointerException();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD)
             return super.submit(task, result);
         else

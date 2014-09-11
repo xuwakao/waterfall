@@ -13,18 +13,18 @@ public class Worker<V> extends FutureTask<V> implements IStateTask, ITimeTask{
 
     public Worker(Runnable runnable, V result) {
         super(runnable, result);
-        setState(State.CREATED);
+        setState(State.Created);
     }
 
     public Worker(Callable<V> callable) {
         super(callable);
-        setState(State.CREATED);
+        setState(State.Created);
     }
 
     @Override
     protected void done() {
         super.done();
-        setState(State.COMPLETED);
+        setState(State.Succsess);
     }
 
     @Override
@@ -35,6 +35,11 @@ public class Worker<V> extends FutureTask<V> implements IStateTask, ITimeTask{
     @Override
     public void setState(State state) {
         this.state = state;
+    }
+
+    @Override
+    public boolean isDone() {
+        return this.state.ordinal() >= State.Succsess.ordinal();
     }
 
     @Override
