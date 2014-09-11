@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/waterfall-framework/src/app/FixedFragmentStatePagerAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/waterfall-framework/src/app/FixedPageFragmentAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/waterfall-framework/src/cn/wacao/waterfall/framework/ui/pager/IPagerPosition.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/waterfall-framework/src/cn/wacao/waterfall/framework/ui/pager/PagerFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/waterfall-framework/src/cn/wacao/waterfall/framework/ui/pager/PagerSelectedAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/waterfall-framework/src/cn/wacao/waterfall/framework/ui/pager/ScrollEnabledViewPager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/waterfall-framework/src/cn/wacao/waterfall/framework/ui/pager/SelectedViewPager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/waterfall-framework/src/cn/wacao/waterfall/framework/utils/Function.java" charset="UTF-8" />
+  </component>
+</project>
+
