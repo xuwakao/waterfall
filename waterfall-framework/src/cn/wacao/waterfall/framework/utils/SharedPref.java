@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
  * Rule : input key cannot be null.
- * 
  */
 public abstract class SharedPref {
 
@@ -35,11 +33,11 @@ public abstract class SharedPref {
     public void putInt(String key, int value) {
         put(key, String.valueOf(value));
     }
-    
+
     public void putBoolean(String key, boolean value) {
         put(key, String.valueOf(value));
     }
-    
+
     public boolean getBoolean(String key, boolean defaultValue) {
         String rawValue = get(key);
         if (TextUtils.isEmpty(rawValue)) {
@@ -47,8 +45,7 @@ public abstract class SharedPref {
         }
         try {
             return Boolean.parseBoolean(rawValue);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             WLog.error(this, "failed to parse boolean value for key %s, %s", key, e);
             return defaultValue;
         }
@@ -108,13 +105,11 @@ public abstract class SharedPref {
     }
 
     /**
-     * 
      * @param key
-     * @param outValues
-     *            For memory reuse, if the result is no greater than this space,
-     *            will fill into this, the redundant elements won't be touched.
-     *            If it is null, a new int array will be created if result is
-     *            not empty.
+     * @param outValues For memory reuse, if the result is no greater than this space,
+     *                  will fill into this, the redundant elements won't be touched.
+     *                  If it is null, a new int array will be created if result is
+     *                  not empty.
      * @return The result list, null if no correlated.
      */
     public int[] getIntArray(String key, int[] outValues) {
@@ -124,7 +119,7 @@ public abstract class SharedPref {
         }
 
         final int[] ret = (list.size() <= outValues.length) ? outValues
-            : new int[list.size()];
+                : new int[list.size()];
 
         int i = 0;
         for (Integer e : list) {
@@ -169,7 +164,7 @@ public abstract class SharedPref {
         }
         return list;
     }
-    
+
     final public void put(String key, String value) {
         mPref.edit().putString(key, value).commit();
     }
@@ -178,7 +173,7 @@ public abstract class SharedPref {
         return mPref.getString(key, null);
     }
 
-    public void remove(String key){
+    public void remove(String key) {
         mPref.edit().remove(key).commit();
     }
 
@@ -186,7 +181,7 @@ public abstract class SharedPref {
         mPref.edit().clear().commit();
     }
 
-    public Map<String, ?> getAll(){
+    public Map<String, ?> getAll() {
         return mPref.getAll();
     }
 
