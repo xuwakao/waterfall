@@ -18,7 +18,7 @@ package cn.wacao.waterfall.framework.ui.photoView.gestures;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.view.MotionEvent;
-import com.yy.mobile.ui.widget.photoView.Compat;
+import cn.wacao.waterfall.framework.ui.photoView.Compat;
 
 @TargetApi(5)
 public class EclairGestureDetector extends CupcakeGestureDetector {

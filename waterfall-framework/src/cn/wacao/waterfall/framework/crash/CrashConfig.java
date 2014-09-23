@@ -14,6 +14,6 @@ public class CrashConfig {
 
     public static final String STACK_TRACE = "STACK_TRACE";
 
-    public static final String UNCAUGHT_EXCEPTIONS_LOGNAME = "uncaught_exception.txt";
+    public static final String CRASH_FILE = "crash.txt";
 
 }

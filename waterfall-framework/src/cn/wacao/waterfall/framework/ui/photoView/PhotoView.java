@@ -25,12 +25,11 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.View;
 import android.widget.ImageView;
-import com.yy.mobile.image.RecycleImageView;
-import com.yy.mobile.ui.widget.photoView.PhotoViewAttacher.OnMatrixChangedListener;
-import com.yy.mobile.ui.widget.photoView.PhotoViewAttacher.OnPhotoTapListener;
-import com.yy.mobile.ui.widget.photoView.PhotoViewAttacher.OnViewTapListener;
+import cn.wacao.waterfall.framework.ui.photoView.PhotoViewAttacher.OnMatrixChangedListener;
+import cn.wacao.waterfall.framework.ui.photoView.PhotoViewAttacher.OnPhotoTapListener;
+import cn.wacao.waterfall.framework.ui.photoView.PhotoViewAttacher.OnViewTapListener;
 
-public class PhotoView extends RecycleImageView implements IPhotoView {
+public class PhotoView extends ImageView implements IPhotoView {
 
     private final PhotoViewAttacher mAttacher;
 

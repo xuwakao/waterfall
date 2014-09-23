@@ -29,10 +29,10 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import com.yy.mobile.ui.widget.photoView.gestures.OnGestureListener;
-import com.yy.mobile.ui.widget.photoView.gestures.VersionedGestureDetector;
-import com.yy.mobile.ui.widget.photoView.log.LogManager;
-import com.yy.mobile.ui.widget.photoView.scrollerproxy.ScrollerProxy;
+import cn.wacao.waterfall.framework.ui.photoView.gestures.OnGestureListener;
+import cn.wacao.waterfall.framework.ui.photoView.gestures.VersionedGestureDetector;
+import cn.wacao.waterfall.framework.ui.photoView.log.LogManager;
+import cn.wacao.waterfall.framework.ui.photoView.scrollerproxy.ScrollerProxy;
 
 import java.lang.ref.WeakReference;
 
@@ -117,7 +117,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
 
     // Gesture Detectors
     private GestureDetector mGestureDetector;
-    private com.yy.mobile.ui.widget.photoView.gestures.GestureDetector mScaleDragDetector;
+    private cn.wacao.waterfall.framework.ui.photoView.gestures.GestureDetector mScaleDragDetector;
 
     // These are set so we don't keep allocating them on the heap
     private final Matrix mBaseMatrix = new Matrix();

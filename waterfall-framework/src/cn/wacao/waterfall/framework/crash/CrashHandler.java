@@ -30,7 +30,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     public void uncaughtException(final Thread thread, final Throwable ex) {
         try {
             String crashData = CrashCollector.collectStackTrace(ex);
-            WLog.info("Konka.crash", crashData);
+            WLog.info("crash", crashData);
             writeTraceToLog(crashData, ex);
             String key = CrashPref.instance().saveCrash(crashData);
             /*if (mListeners != null && key!=null) {
@@ -49,7 +49,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     private void writeTraceToLog(String traces, Throwable ex) {
         try {
-            LogToES.writeLogToFile(LogToES.getLogPath(), CrashConfig.UNCAUGHT_EXCEPTIONS_LOGNAME, traces,
+            LogToES.writeLogToFile(LogToES.getLogPath(), CrashConfig.CRASH_FILE, traces,
                     true, System.currentTimeMillis());
             WLog.error(this, ex);
         } catch (Exception e) {
