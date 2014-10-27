@@ -20,7 +20,7 @@ import android.content.Context;
 import android.widget.OverScroller;
 
 @TargetApi(9)
-public class GingerScroller extends com.yy.mobile.ui.widget.photoView.scrollerproxy.ScrollerProxy {
+public class GingerScroller extends cn.wacao.waterfall.framework.ui.photoView.scrollerproxy.ScrollerProxy {
 
     protected final OverScroller mScroller;
     private boolean mFirstScroll = false;
