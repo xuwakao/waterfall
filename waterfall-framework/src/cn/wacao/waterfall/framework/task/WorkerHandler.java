@@ -2,6 +2,7 @@ package cn.wacao.waterfall.framework.task;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 
 import java.util.concurrent.*;
 
@@ -13,7 +14,7 @@ public class WorkerHandler implements IWorkerHandler {
     private Handler mHandler;
     private Looper mLooper;
 
-    private WorkerHandler(Looper looper) {
+    public WorkerHandler(Looper looper) {
         if (looper == null)
             looper = Looper.getMainLooper();
         mLooper = looper;
@@ -21,7 +22,7 @@ public class WorkerHandler implements IWorkerHandler {
         mExecutor = new WorkerExecutor(8, 8, 10L, TimeUnit.SECONDS, new PriorityBlockingQueue<Runnable>(8), new WorkerThreadFactory(), null);
     }
 
-    private Looper getLoopper() {
+    public Looper getLoopper() {
         return mLooper;
     }
 

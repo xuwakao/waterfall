@@ -9,6 +9,7 @@ public interface IStateTask {
         Running,
         Succsess,
         Error,
+        Timeout,
         Canceled,
         Interupted
     }

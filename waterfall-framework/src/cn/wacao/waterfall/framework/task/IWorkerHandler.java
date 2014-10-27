@@ -1,7 +1,8 @@
 package cn.wacao.waterfall.framework.task;
 
 /**
- * Created by duowan on 14-9-24.
+ * Created by wacao on 14-9-24.
  */
-public class IWorkerHandler {
+public interface IWorkerHandler {
+    public <T> Worker<T> submit(Worker<T> worker);
 }

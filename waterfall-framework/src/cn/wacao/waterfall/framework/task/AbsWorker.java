@@ -6,11 +6,11 @@ import java.util.concurrent.FutureTask;
 /**
  * Created by wacao on 2014/8/10.
  */
-public class AbsWorker<V> extends FutureTask<V> implements IStateTask, ITimeTask{
+public abstract class AbsWorker<V> extends FutureTask<V> implements IStateTask, ITimeTask {
     private State state;
     private long startTime;
     private long endTime;
-    private int timeout = Integer.MAX_VALUE;
+    protected int timeout = Integer.MAX_VALUE;
 
     public AbsWorker(Runnable runnable, V result) {
         super(runnable, result);
@@ -60,4 +60,6 @@ public class AbsWorker<V> extends FutureTask<V> implements IStateTask, ITimeTask
     public int getTimeout() {
         return timeout;
     }
+
+    public abstract void perform();
 }

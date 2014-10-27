@@ -29,30 +29,30 @@ public class WorkerExecutor extends ThreadPoolExecutor {
     @Override
     protected void beforeExecute(Thread t, Runnable r) {
         super.beforeExecute(t, r);
-        if (r instanceof Worker) {
-            ((Worker) r).markStart(SystemClock.elapsedRealtime());
-            ((Worker) r).setState(IStateTask.State.Running);
+        if (r instanceof AbsWorker) {
+            ((AbsWorker) r).markStart(SystemClock.elapsedRealtime());
+            ((AbsWorker) r).setState(IStateTask.State.Running);
         }
     }
 
     @Override
     protected void afterExecute(Runnable r, Throwable t) {
         super.afterExecute(r, t);
-        if (r instanceof Worker) {
-            ((Worker) r).markEnd(SystemClock.elapsedRealtime());
-            try {
-                Object result = ((Worker) r).get();
+        if (r instanceof AbsWorker) {
+            ((AbsWorker) r).markEnd(SystemClock.elapsedRealtime());
+/*            try {
+                Object result = ((AbsWorker) r).get();
             } catch (CancellationException ce) {
                 t = ce;
-                ((Worker) r).setState(IStateTask.State.Canceled);
+                ((AbsWorker) r).setState(IStateTask.State.Canceled);
             } catch (ExecutionException ee) {
                 t = ee.getCause();
-                ((Worker) r).setState(IStateTask.State.Error);
+                ((AbsWorker) r).setState(IStateTask.State.Error);
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt(); // ignore/reset
                 t = ie;
-                ((Worker) r).setState(IStateTask.State.Interupted);
-            }
+                ((AbsWorker) r).setState(IStateTask.State.Interupted);
+            }*/
         }
     }
 
@@ -62,52 +62,52 @@ public class WorkerExecutor extends ThreadPoolExecutor {
     }
 
     @Override
-    public Future<?> submit(Runnable task) {
+    public Worker<?> submit(Runnable task) {
         if (task == null)
             throw new NullPointerException();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD)
-            return super.submit(task);
+            return (Worker<?>) super.submit(task);
         else
             return newCompatibleTaskFor(task, null);
     }
 
     @Override
-    public <T> Future<T> submit(Callable<T> task) {
+    public <T> Worker<T> submit(Callable<T> task) {
         if (task == null)
             throw new NullPointerException();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD)
-            return super.submit(task);
+            return (Worker<T>) super.submit(task);
         else
             return newCompatibleTaskFor(task);
     }
 
     @Override
-    public <T> Future<T> submit(Runnable task, T result) {
+    public <T> Worker<T> submit(Runnable task, T result) {
         if (task == null)
             throw new NullPointerException();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD)
-            return super.submit(task, result);
+            return (Worker<T>) super.submit(task, result);
         else
             return newCompatibleTaskFor(task, result);
     }
 
     @TargetApi(9)
     @Override
-    protected <T> RunnableFuture<T> newTaskFor(Callable<T> callable) {
+    protected <T> Worker<T> newTaskFor(Callable<T> callable) {
         return new Worker<T>(callable);
     }
 
     @TargetApi(9)
     @Override
-    protected <T> RunnableFuture<T> newTaskFor(Runnable runnable, T value) {
+    protected <T> Worker<T> newTaskFor(Runnable runnable, T value) {
         return new Worker<T>(runnable, value);
     }
 
-    protected <T> RunnableFuture<T> newCompatibleTaskFor(Callable<T> callable) {
+    protected <T> Worker<T> newCompatibleTaskFor(Callable<T> callable) {
         return new Worker<T>(callable);
     }
 
-    protected <T> RunnableFuture<T> newCompatibleTaskFor(Runnable runnable, T value) {
+    protected <T> Worker<T> newCompatibleTaskFor(Runnable runnable, T value) {
         return new Worker<T>(runnable, value);
     }
 }
