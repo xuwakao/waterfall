@@ -6,17 +6,18 @@ import java.util.concurrent.FutureTask;
 /**
  * Created by wacao on 2014/8/10.
  */
-public class Worker<V> extends FutureTask<V> implements IStateTask, ITimeTask{
+public class AbsWorker<V> extends FutureTask<V> implements IStateTask, ITimeTask{
     private State state;
     private long startTime;
     private long endTime;
+    private int timeout = Integer.MAX_VALUE;
 
-    public Worker(Runnable runnable, V result) {
+    public AbsWorker(Runnable runnable, V result) {
         super(runnable, result);
         setState(State.Created);
     }
 
-    public Worker(Callable<V> callable) {
+    public AbsWorker(Callable<V> callable) {
         super(callable);
         setState(State.Created);
     }
@@ -50,5 +51,13 @@ public class Worker<V> extends FutureTask<V> implements IStateTask, ITimeTask{
     @Override
     public void markEnd(long timing) {
         endTime = timing;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
+
+    public int getTimeout() {
+        return timeout;
     }
 }
